@@ -1,0 +1,4 @@
+C:\Users\kai\Desktop\c#课程设计\mysql\mysql\bin\Debug\mysql.exe
+C:\Users\kai\Desktop\c#课程设计\mysql\mysql\bin\Debug\mysql.pdb
+C:\Users\kai\Desktop\c#课程设计\mysql\mysql\obj\x86\Debug\mysql.exe
+C:\Users\kai\Desktop\c#课程设计\mysql\mysql\obj\x86\Debug\mysql.pdb

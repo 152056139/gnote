@@ -1,0 +1,8 @@
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\bin\Debug\Gnote.exe
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\bin\Debug\Gnote.pdb
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\obj\x86\Debug\Gnote.Properties.Resources.resources
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\obj\x86\Debug\Gnote.csproj.GenerateResource.Cache
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\obj\x86\Debug\Gnote.exe
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\obj\x86\Debug\Gnote.pdb
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\obj\x86\Debug\Gnote.csprojResolveAssemblyReference.cache
+C:\Users\kai\Desktop\c#课程设计\Gnote\Gnote\obj\x86\Debug\Gnote.Gnote.resources
