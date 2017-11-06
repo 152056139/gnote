@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "View", "Gnote\View.csproj", "{A964EF6F-EE7B-4B2C-B205-9A47CDEB409F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gnote", "Gnote\Gnote.csproj", "{A964EF6F-EE7B-4B2C-B205-9A47CDEB409F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -92,7 +92,7 @@ namespace Gnote
             this.panelSearch = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.search = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxEdit = new System.Windows.Forms.RichTextBox();
             this.toolStripEdit = new System.Windows.Forms.ToolStrip();
             this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
@@ -100,7 +100,7 @@ namespace Gnote
             this.toolStripButton7 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton8 = new System.Windows.Forms.ToolStripButton();
             this.panelTitle = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.textBoxTitle = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.contextMenuStrip_notebook_root = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.新建笔记本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -108,6 +108,15 @@ namespace Gnote
             this.contextMenuStrip_notebook = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ToolStripMenuItem_notebook = new System.Windows.Forms.ToolStripMenuItem();
             this.删除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.设置为默认笔记本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripListBox = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.删除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.重命名ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.移动到ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.我的笔记本ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.标签管理ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.statusStrip.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -126,6 +135,7 @@ namespace Gnote
             this.panelTitle.SuspendLayout();
             this.contextMenuStrip_notebook_root.SuspendLayout();
             this.contextMenuStrip_notebook.SuspendLayout();
+            this.contextMenuStripListBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -176,6 +186,7 @@ namespace Gnote
             this.新建ToolStripMenuItem.Name = "新建ToolStripMenuItem";
             this.新建ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.新建ToolStripMenuItem.Text = "新建";
+            this.新建ToolStripMenuItem.Click += new System.EventHandler(this.新建ToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -535,11 +546,13 @@ namespace Gnote
             // 
             this.treeview_nav.ContextMenuStrip = this.contextMenuStrip_treeview_nav;
             this.treeview_nav.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeview_nav.HotTracking = true;
+            this.treeview_nav.HideSelection = false;
             this.treeview_nav.Location = new System.Drawing.Point(0, 0);
             this.treeview_nav.Name = "treeview_nav";
             this.treeview_nav.Size = new System.Drawing.Size(111, 450);
             this.treeview_nav.TabIndex = 0;
+            this.treeview_nav.AfterLabelEdit += new System.Windows.Forms.NodeLabelEditEventHandler(this.treeview_nav_AfterLabelEdit);
+            this.treeview_nav.MouseDown += new System.Windows.Forms.MouseEventHandler(this.treeview_nav_MouseDown);
             // 
             // contextMenuStrip_treeview_nav
             // 
@@ -568,7 +581,7 @@ namespace Gnote
             // 
             // splitContainer2.Panel2
             // 
-            this.splitContainer2.Panel2.Controls.Add(this.richTextBox1);
+            this.splitContainer2.Panel2.Controls.Add(this.richTextBoxEdit);
             this.splitContainer2.Panel2.Controls.Add(this.toolStripEdit);
             this.splitContainer2.Panel2.Controls.Add(this.panelTitle);
             this.splitContainer2.Size = new System.Drawing.Size(813, 450);
@@ -580,16 +593,11 @@ namespace Gnote
             this.listBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBox.FormattingEnabled = true;
             this.listBox.ItemHeight = 12;
-            this.listBox.Items.AddRange(new object[] {
-            "我的第一个笔记本",
-            "第二个笔记本",
-            "第三个",
-            "四",
-            "。。。"});
             this.listBox.Location = new System.Drawing.Point(0, 26);
             this.listBox.Name = "listBox";
             this.listBox.Size = new System.Drawing.Size(138, 424);
             this.listBox.TabIndex = 1;
+            this.listBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.listBox_MouseDown);
             // 
             // panelSearch
             // 
@@ -622,16 +630,16 @@ namespace Gnote
             this.search.UseVisualStyleBackColor = true;
             this.search.Click += new System.EventHandler(this.search_Click);
             // 
-            // richTextBox1
+            // richTextBoxEdit
             // 
-            this.richTextBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.richTextBoxEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.richTextBox1.Location = new System.Drawing.Point(0, 56);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(668, 394);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
+            this.richTextBoxEdit.Location = new System.Drawing.Point(0, 56);
+            this.richTextBoxEdit.Name = "richTextBoxEdit";
+            this.richTextBoxEdit.Size = new System.Drawing.Size(668, 394);
+            this.richTextBoxEdit.TabIndex = 2;
+            this.richTextBoxEdit.Text = "";
             // 
             // toolStripEdit
             // 
@@ -698,21 +706,21 @@ namespace Gnote
             // 
             this.panelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.panelTitle.Controls.Add(this.textBox2);
+            this.panelTitle.Controls.Add(this.textBoxTitle);
             this.panelTitle.Controls.Add(this.label1);
             this.panelTitle.Location = new System.Drawing.Point(2, 3);
             this.panelTitle.Name = "panelTitle";
             this.panelTitle.Size = new System.Drawing.Size(669, 25);
             this.panelTitle.TabIndex = 0;
             // 
-            // textBox2
+            // textBoxTitle
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+            this.textBoxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(38, 2);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(628, 21);
-            this.textBox2.TabIndex = 1;
+            this.textBoxTitle.Location = new System.Drawing.Point(38, 2);
+            this.textBoxTitle.Name = "textBoxTitle";
+            this.textBoxTitle.Size = new System.Drawing.Size(628, 21);
+            this.textBoxTitle.TabIndex = 1;
             // 
             // label1
             // 
@@ -736,6 +744,7 @@ namespace Gnote
             this.新建笔记本ToolStripMenuItem.Name = "新建笔记本ToolStripMenuItem";
             this.新建笔记本ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.新建笔记本ToolStripMenuItem.Text = "新建笔记本";
+            this.新建笔记本ToolStripMenuItem.Click += new System.EventHandler(this.新建笔记本ToolStripMenuItem_Click);
             // 
             // 笔记本管理器ToolStripMenuItem
             // 
@@ -747,21 +756,85 @@ namespace Gnote
             // 
             this.contextMenuStrip_notebook.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ToolStripMenuItem_notebook,
-            this.删除ToolStripMenuItem});
+            this.删除ToolStripMenuItem,
+            this.toolStripSeparator8,
+            this.设置为默认笔记本ToolStripMenuItem});
             this.contextMenuStrip_notebook.Name = "contextMenuStrip_notebook";
-            this.contextMenuStrip_notebook.Size = new System.Drawing.Size(113, 48);
+            this.contextMenuStrip_notebook.Size = new System.Drawing.Size(173, 76);
             // 
             // ToolStripMenuItem_notebook
             // 
             this.ToolStripMenuItem_notebook.Name = "ToolStripMenuItem_notebook";
-            this.ToolStripMenuItem_notebook.Size = new System.Drawing.Size(112, 22);
+            this.ToolStripMenuItem_notebook.Size = new System.Drawing.Size(172, 22);
             this.ToolStripMenuItem_notebook.Text = "重命名";
+            this.ToolStripMenuItem_notebook.Click += new System.EventHandler(this.ToolStripMenuItem_notebook_Click);
             // 
             // 删除ToolStripMenuItem
             // 
             this.删除ToolStripMenuItem.Name = "删除ToolStripMenuItem";
-            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.删除ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
             this.删除ToolStripMenuItem.Text = "删除";
+            this.删除ToolStripMenuItem.Click += new System.EventHandler(this.删除ToolStripMenuItem_Click);
+            // 
+            // 设置为默认笔记本ToolStripMenuItem
+            // 
+            this.设置为默认笔记本ToolStripMenuItem.Name = "设置为默认笔记本ToolStripMenuItem";
+            this.设置为默认笔记本ToolStripMenuItem.Size = new System.Drawing.Size(172, 22);
+            this.设置为默认笔记本ToolStripMenuItem.Text = "设置为默认笔记本";
+            this.设置为默认笔记本ToolStripMenuItem.Click += new System.EventHandler(this.设置为默认笔记本ToolStripMenuItem_Click);
+            // 
+            // contextMenuStripListBox
+            // 
+            this.contextMenuStripListBox.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.删除ToolStripMenuItem1,
+            this.重命名ToolStripMenuItem,
+            this.toolStripSeparator7,
+            this.移动到ToolStripMenuItem,
+            this.标签管理ToolStripMenuItem});
+            this.contextMenuStripListBox.Name = "contextMenuStripListBox";
+            this.contextMenuStripListBox.Size = new System.Drawing.Size(125, 98);
+            // 
+            // 删除ToolStripMenuItem1
+            // 
+            this.删除ToolStripMenuItem1.Name = "删除ToolStripMenuItem1";
+            this.删除ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
+            this.删除ToolStripMenuItem1.Text = "删除";
+            // 
+            // 重命名ToolStripMenuItem
+            // 
+            this.重命名ToolStripMenuItem.Name = "重命名ToolStripMenuItem";
+            this.重命名ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.重命名ToolStripMenuItem.Text = "重命名";
+            // 
+            // 移动到ToolStripMenuItem
+            // 
+            this.移动到ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.我的笔记本ToolStripMenuItem});
+            this.移动到ToolStripMenuItem.Name = "移动到ToolStripMenuItem";
+            this.移动到ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.移动到ToolStripMenuItem.Text = "移动到";
+            // 
+            // 我的笔记本ToolStripMenuItem
+            // 
+            this.我的笔记本ToolStripMenuItem.Name = "我的笔记本ToolStripMenuItem";
+            this.我的笔记本ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.我的笔记本ToolStripMenuItem.Text = "我的笔记本";
+            // 
+            // 标签管理ToolStripMenuItem
+            // 
+            this.标签管理ToolStripMenuItem.Name = "标签管理ToolStripMenuItem";
+            this.标签管理ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.标签管理ToolStripMenuItem.Text = "标签管理";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(121, 6);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(169, 6);
             // 
             // Gnote
             // 
@@ -803,6 +876,7 @@ namespace Gnote
             this.panelTitle.PerformLayout();
             this.contextMenuStrip_notebook_root.ResumeLayout(false);
             this.contextMenuStrip_notebook.ResumeLayout(false);
+            this.contextMenuStripListBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -868,9 +942,9 @@ namespace Gnote
         private System.Windows.Forms.Button search;
         private System.Windows.Forms.ListBox listBox;
         private System.Windows.Forms.Panel panelTitle;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox textBoxTitle;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.RichTextBox richTextBoxEdit;
         private System.Windows.Forms.ToolStrip toolStripEdit;
         private System.Windows.Forms.ToolStripButton toolStripButton4;
         private System.Windows.Forms.ToolStripButton toolStripButton5;
@@ -886,6 +960,15 @@ namespace Gnote
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip_notebook;
         private System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem_notebook;
         private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 设置为默认笔记本ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripListBox;
+        private System.Windows.Forms.ToolStripMenuItem 删除ToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem 重命名ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripMenuItem 移动到ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 我的笔记本ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 标签管理ToolStripMenuItem;
     }
 }
 

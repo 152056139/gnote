@@ -44,9 +44,23 @@ namespace Gnote.Controller
             }*/
         }
         //删除笔记本
-        public void deleteNotebook(int notebookNo)
+        public void deleteNotebook(int notebook_no)
         {
-            new MNotebook().delete_notebook(notebookNo);
+            new MNotebook().delete_notebook(notebook_no);
+        }
+        public void renameNotebook(int notebook_no, string new_notebook_name)
+        {
+            new MNotebook().renameNotebook(notebook_no, new_notebook_name);
+        }
+        //设置默认笔记本
+        public void setDefault(int notebook_no)
+        {
+            new MNotebook().setDefault(notebook_no);
+        }
+        //获得默认笔记本
+        public int getDefault()
+        {
+            return new MNotebook().getDefault();
         }
     }
 }
