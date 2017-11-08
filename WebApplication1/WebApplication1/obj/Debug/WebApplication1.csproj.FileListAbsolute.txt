@@ -1,0 +1,4 @@
+C:\Users\kai\Desktop\c#课程设计\WebApplication1\WebApplication1\bin\WebApplication1.dll
+C:\Users\kai\Desktop\c#课程设计\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+C:\Users\kai\Desktop\c#课程设计\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+C:\Users\kai\Desktop\c#课程设计\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb

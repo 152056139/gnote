@@ -61,12 +61,37 @@ namespace Gnote.Controller
             MySqlDataReader reader = mnote.list_note();
             return reader;
         }
-        public MySqlDataReader listNote(int notebook_no)
+        public MySqlDataReader listNote(int notebook_no, string type)
         {
-            MNote mnote = new MNote();
-            MySqlDataReader reader = mnote.list_note(notebook_no);
-            return reader;
+            if (type == "notebook")
+            {
+                MNote mnote = new MNote();
+                MySqlDataReader reader = mnote.list_note_notenook(notebook_no);
+                return reader;
+            }
+            else// if (type == "label")
+            {
+                MNote mnote = new MNote();
+                MySqlDataReader reader = mnote.list_note_label(notebook_no);
+                return reader;
+            }
         }
+        public MySqlDataReader listNote(string type)
+        {
+            if (type == "trash")
+            {
+                MNote mnote = new MNote();
+                MySqlDataReader reader = mnote.list_note_trash();
+                return reader;
+            }
+            else// if (type == "favourite")
+            {
+                MNote mnote = new MNote();
+                MySqlDataReader reader = mnote.list_note_favourite();
+                return reader;
+            }
+        }
+
 
         //新建笔记
         public void newNote(int notebook)
@@ -86,6 +111,18 @@ namespace Gnote.Controller
         public MySqlDataReader ShowDetail(int note_no)
         {
             return new MNote().ShowDetail(note_no);
+        }
+        
+        //保存笔记
+        public void SaveNote(int note_no, string note_name, DateTime note_modify_time, string note_content)
+        {
+            new MNote().SaveNote(note_no, note_name, note_modify_time, note_content);
+        }
+
+        //删除笔记
+        public void deleteNote(int note_no)
+        {
+            new MNote().deleteNote(note_no);
         }
     }
 }

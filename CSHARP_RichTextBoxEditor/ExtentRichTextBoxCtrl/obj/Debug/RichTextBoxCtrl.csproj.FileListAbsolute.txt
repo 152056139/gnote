@@ -1,0 +1,10 @@
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\bin\Debug\Microsoft.Net3.5.RichTextBoxCtrl.dll
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\bin\Debug\Microsoft.Net3.5.RichTextBoxCtrl.pdb
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\System.Windows.Forms.FindDialog.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\System.Windows.Forms.frm_GOTO.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\System.Windows.Forms.ReplaceDialog.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\System.Windows.Forms.richTextBoxTableDlg.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\System.Windows.Forms.ViewRtfSoruceDlg.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\RichTextBoxCtrl.csproj.GenerateResource.Cache
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\Microsoft.Net3.5.RichTextBoxCtrl.dll
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\ExtentRichTextBoxCtrl\obj\Debug\Microsoft.Net3.5.RichTextBoxCtrl.pdb

@@ -1,0 +1,7 @@
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\bin\Debug\Microsoft.Net3.5.TextRuler.dll
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\bin\Debug\Microsoft.Net3.5.TextRuler.pdb
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\obj\Debug\TextRulerClassLibrary.Properties.Resources.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\obj\Debug\System.Windows.Forms.TextRuler.resources
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\obj\Debug\TextRulerCtrl.csproj.GenerateResource.Cache
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\obj\Debug\Microsoft.Net3.5.TextRuler.dll
+C:\Users\kai\Downloads\CSHARP_RichTextBoxEditor\TextRulerClassLibrary\obj\Debug\Microsoft.Net3.5.TextRuler.pdb
