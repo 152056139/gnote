@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace Gnote.Model
 {
@@ -27,8 +28,6 @@ namespace Gnote.Model
                 MySqlConnection mysqlconnection = getMySqlCon();
                 mysqlconnection.Open();
                  mySqlCommand = new MySqlCommand(sql, mysqlconnection);
-                //  MySqlCommand mySqlCommand = new MySqlCommand(sql);
-                // mySqlCommand.Connection = mysqlconnection;
             }
             catch (Exception e)
             {
@@ -45,7 +44,7 @@ namespace Gnote.Model
             try
             {
                 mysqlcommand = getSqlCommand(sql);
-                mysqldatareader = mysqlcommand.ExecuteReader();
+                mysqldatareader = mysqlcommand.ExecuteReader(CommandBehavior.CloseConnection);
             }
             catch (Exception e)
             {

@@ -1,6 +1,6 @@
 ﻿namespace form
 {
-    partial class Form2
+    partial class FormMain
     {
         /// <summary>
         /// Required designer variable.
@@ -40,14 +40,15 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
-            // Form2
+            // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(345, 187);
             this.Controls.Add(this.label1);
-            this.Name = "Form2";
+            this.Name = "FormMain";
             this.Text = "Form2";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

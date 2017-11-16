@@ -15,7 +15,18 @@ namespace form
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            FormLogin fl = new FormLogin();
+            fl.ShowDialog();
+            if (fl.DialogResult == DialogResult.Cancel)
+            {
+                Application.Run(new FormMain());
+            }
+            else
+            {
+                return;
+            }
+                
+            
         }
     }
 }

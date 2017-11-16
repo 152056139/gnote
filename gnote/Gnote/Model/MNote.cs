@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MySql.Data;
 using MySql.Data.MySqlClient;
+using System.IO;
 
 namespace Gnote.Model
 {
@@ -40,25 +41,26 @@ namespace Gnote.Model
         }
         public MySqlDataReader list_note_favourite()
         {
-            string sql = "SELECT * FROM `note` WHERE `note_favourite`='0' AND `note_has_delete`='0';";
+            string sql = "SELECT * FROM `note` WHERE `note_favourite`='1' AND `note_has_delete`='0';";
             MysqlBase mysqlbase = new MysqlBase();
             MySqlDataReader reader = mysqlbase.query(sql);
             return reader;
         }
 
         //新建笔记
-        public void newnote(string notename, DateTime createtime, DateTime modifytime, int hasdelete, int notebook, string content)
+        public void newnote(string notename, DateTime createtime, DateTime modifytime, int hasdelete, int notebook, string text, string content, int favourite)
         {
-            
-            string sql = "INSERT INTO `note` (`note_name`,`note_create_time`, `note_modify_time`, `note_has_delete`, `notebook_no`, `note_content`) VALUES ('" + notename + "','" + createtime + "','" + modifytime + "','" + hasdelete + "','" + notebook + "','" + content + "');";
+
+            string sql = "INSERT INTO `note` (`note_name`,`note_create_time`, `note_modify_time`, `note_has_delete`, `notebook_no`, `note_text`, `note_content`, `note_favourite`) VALUES ('" + notename + "','" + createtime + "','" + modifytime + "','" + hasdelete + "','" + notebook + "','" + text + "','" + content + "','" + favourite + "');";
 
             MysqlBase mysqlbase = new MysqlBase();
             mysqlbase.execute(sql);
         }
         //保存笔记
-        public void SaveNote(int note_no, string note_name, DateTime note_modify_time, string note_content)
+        public void SaveNote(int note_no, string note_name, DateTime note_modify_time, string note_text)
         {
-            string sql = "UPDATE `note` SET `note_name`='" + note_name + "', `note_modify_time`='"+note_modify_time+"', `note_content`='" + note_content + "' WHERE (`note_no`='" + note_no + "')";
+
+            string sql = "UPDATE `note` SET `note_name`='" + note_name + "', `note_modify_time`='" + note_modify_time + "', `note_text`='" + note_text + "' WHERE (`note_no`='" + note_no + "')";
             new MysqlBase().execute(sql);
 
         }
@@ -75,6 +77,19 @@ namespace Gnote.Model
         public void deleteNote(int note_no)
         {
             string sql = "UPDATE `note` SET `note_has_delete`='1' WHERE (`note_no`='"+note_no+"'); ";
+            new MysqlBase().query(sql);
+        }
+
+        //收藏笔记
+        public void favouriteNote(int note_no)
+        {
+            string sql = "UPDATE `note` SET `note_favourite`='1' WHERE (`note_no`='" + note_no + "'); ";
+            new MysqlBase().query(sql);
+        }
+        //取消收藏笔记
+        public void unfavouriteNote(int note_no)
+        {
+            string sql = "UPDATE `note` SET `note_favourite`='0' WHERE (`note_no`='" + note_no + "'); ";
             new MysqlBase().query(sql);
         }
     }

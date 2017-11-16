@@ -52,8 +52,21 @@ namespace Gnote.Controller
             get { return _content; }
             set { _content = value; }
         }
+        private string _text;
 
+        public string Text
+        {
+            get { return _text; }
+            set { _text = value; }
+        }
 
+        private int _favourite;
+
+        public int Favourite
+        {
+            get { return _favourite; }
+            set { _favourite = value; }
+        }
         //笔记列表
         public MySqlDataReader listNote()
         {
@@ -101,8 +114,10 @@ namespace Gnote.Controller
             NoteModifyTime = DateTime.Now;
             HasDelete = 0;
             Notebook = notebook;
+            Text = "";
             Content = "";
-            new MNote().newnote(NoteTitle, NoteCreateTime, NoteModifyTime, HasDelete, Notebook, Content);
+            Favourite = 0;
+            new MNote().newnote(NoteTitle, NoteCreateTime, NoteModifyTime, HasDelete, Notebook, Text, Content, Favourite);
             Console.WriteLine("进入新建笔记控制器");
 
         }
@@ -114,9 +129,9 @@ namespace Gnote.Controller
         }
         
         //保存笔记
-        public void SaveNote(int note_no, string note_name, DateTime note_modify_time, string note_content)
+        public void SaveNote(int note_no, string note_name, DateTime note_modify_time, string note_text)
         {
-            new MNote().SaveNote(note_no, note_name, note_modify_time, note_content);
+            new MNote().SaveNote(note_no, note_name, note_modify_time, note_text);
         }
 
         //删除笔记
@@ -124,5 +139,16 @@ namespace Gnote.Controller
         {
             new MNote().deleteNote(note_no);
         }
+        //收藏笔记
+        public void favouriteNote(int note_no)
+        {
+            new MNote().favouriteNote(note_no);
+        }
+        //取消收藏笔记
+        public void unfavouriteNote(int note_no)
+        {
+            new MNote().unfavouriteNote(note_no);
+        }
+
     }
 }

@@ -9,11 +9,17 @@ using System.Windows.Forms;
 
 namespace form
 {
-    public partial class Form2 : Form
+    public partial class FormLogin : Form
     {
-        public Form2()
+        public FormLogin()
         {
             InitializeComponent();
+        }
+
+        private void button_login_Click(object sender, EventArgs e)
+        {
+            
+            this.Close();
         }
     }
 }

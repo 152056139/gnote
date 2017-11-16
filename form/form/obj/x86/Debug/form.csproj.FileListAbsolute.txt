@@ -1,0 +1,8 @@
+C:\Users\kai\Desktop\c#课程设计\form\form\bin\Debug\form.exe
+C:\Users\kai\Desktop\c#课程设计\form\form\bin\Debug\form.pdb
+C:\Users\kai\Desktop\c#课程设计\form\form\obj\x86\Debug\form.Properties.Resources.resources
+C:\Users\kai\Desktop\c#课程设计\form\form\obj\x86\Debug\form.csproj.GenerateResource.Cache
+C:\Users\kai\Desktop\c#课程设计\form\form\obj\x86\Debug\form.exe
+C:\Users\kai\Desktop\c#课程设计\form\form\obj\x86\Debug\form.pdb
+C:\Users\kai\Desktop\c#课程设计\form\form\obj\x86\Debug\form.FormLogin.resources
+C:\Users\kai\Desktop\c#课程设计\form\form\obj\x86\Debug\form.FormMain.resources

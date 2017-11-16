@@ -10,6 +10,7 @@ using Gnote.Dialog;
 using Gnote.Controller;
 using MySql.Data.MySqlClient;
 using MySql.Data;
+using System.IO;
 
 namespace Gnote
 {
@@ -137,28 +138,27 @@ namespace Gnote
                 treeview_nav.SelectedNode = treeview_nav.GetNodeAt(e.X, e.Y);
                 if (treeview_nav.SelectedNode != null)
                 {
-                    TreeNodeTag treenodenotebooktag = treeview_nav.SelectedNode.Tag as TreeNodeTag;
-                    TreeNodeTag treenodelabeltag = treeview_nav.SelectedNode.Tag as TreeNodeTag;
-                    if (treenodenotebooktag != null || treenodelabeltag != null)
+                    TreeNodeTag treenodetag = treeview_nav.SelectedNode.Tag as TreeNodeTag;
+                    if (treenodetag != null)
                     {
-                        if (treenodelabeltag.node_type == "label")
+                        if (treenodetag.node_type == "label")
                         {
-                            int nodeLabelNo = treenodelabeltag.no;
+                            int nodeLabelNo = treenodetag.no;
                             Load_label_list(nodeLabelNo);
                         }
-                        else if (treenodenotebooktag.node_type == "notebook")
+                        else if (treenodetag.node_type == "notebook")
                         {
-                            int nodeNotebookNo = treenodenotebooktag.no;
+                            int nodeNotebookNo = treenodetag.no;
                             Load_note_list(nodeNotebookNo);
                         }
-                        else if (treenodenotebooktag.node_type == "favourite_root")
+                        else if (treenodetag.node_type == "favourite_root")
                         {
-                            int nodeNotebookNo = treenodenotebooktag.no;
+                            int nodeNotebookNo = treenodetag.no;
                             Load_favourite_list();
                         }
-                        else if (treenodenotebooktag.node_type == "trash_root")
+                        else if (treenodetag.node_type == "trash_root")
                         {
-                            int nodeNotebookNo = treenodenotebooktag.no;
+                            int nodeNotebookNo = treenodetag.no;
                             Load_trash_list();
                         }
 
@@ -190,6 +190,16 @@ namespace Gnote
             {
 
             }
+        }
+        //新建笔记
+        private void 新建笔记ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            textBoxTitle.Text = "无标题笔记";
+            textBoxEdit.Text = "";
+            TreeNodeTag treenodetag = treeview_nav.SelectedNode.Tag as TreeNodeTag;
+            new Note().newNote(treenodetag.no);
+            Load_note_list(treenodetag.no);
+            toolStripStatusLabelTip.Text = "笔记新建成功";
         }
         private void 设置为默认笔记本ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -274,6 +284,34 @@ namespace Gnote
 
         #region 中间列表栏
 
+        //笔记右击菜单移动到笔记本
+        public void contextMenuStripListBoxNote_move_notebook()
+        {
+
+            ((ToolStripDropDownItem)contextMenuStripListBoxNote.Items["移动到ToolStripMenuItem"]).DropDownItems.Clear();
+            MySqlDataReader reader = new Notebook().listNotebook();
+            while (reader.Read())
+            {
+                if (reader.HasRows)
+                {
+                    ((ToolStripDropDownItem)contextMenuStripListBoxNote.Items["移动到ToolStripMenuItem"]).DropDownItems.Add(reader.GetString("notebook_name"));
+                }
+            }
+        }
+        //笔记右击菜单添加标签
+        public void contextMenuStripListBoxNote_add_label()
+        {
+            ((ToolStripDropDownItem)contextMenuStripListBoxNote.Items["标签管理ToolStripMenuItem"]).DropDownItems.Clear();
+            MySqlDataReader reader = new Controller.Label().list_label();
+            while (reader.Read())
+            {
+                if (reader.HasRows)
+                {
+                    ((ToolStripDropDownItem)contextMenuStripListBoxNote.Items["标签管理ToolStripMenuItem"]).DropDownItems.Add(reader.GetString("label_name"));
+                }
+            }
+        }
+
         //加载所有笔记列表
         public void Load_note_list()
         {
@@ -284,13 +322,22 @@ namespace Gnote
             {
                 if (reader_note.HasRows)
                 {
-                    listBox.Items.Add(new ListBoxItems { Name = reader_note.GetString("note_name"), Value = reader_note.GetInt32("note_no") });
-                    listBox.ContextMenuStrip = contextMenuStripListBox;
+                    
+                    收藏ToolStripMenuItem.Checked = true;
+                    listBox.Items.Add(new ListBoxItems 
+                    { 
+                        Name = reader_note.GetString("note_name"), 
+                        No = reader_note.GetInt32("note_no"),
+                        Is_favourite = reader_note.GetInt32("note_favourite")
+                    });
+                    contextMenuStripListBoxNote_move_notebook();
+                    contextMenuStripListBoxNote_add_label();
+                    listBox.ContextMenuStrip = contextMenuStripListBoxNote;
                     listBox.DisplayMember = "Name";
                 }
             }
         }
-        //加载指定笔记本
+        //加载指定笔记本的笔记列表
         public void Load_note_list(int notebook_no)
         {
             listBox.Items.Clear();
@@ -300,17 +347,16 @@ namespace Gnote
             {
                 if (reader_note.HasRows)
                 {
-                    string a;
-                    if (reader_note.GetInt32("note_favourite") == 1)
+
+                    listBox.Items.Add(new ListBoxItems
                     {
-                        a = reader_note.GetString("note_name") + "(收藏)";
-                    }
-                    else
-                    {
-                        a = reader_note.GetString("note_name");
-                    }
-                    listBox.Items.Add(new ListBoxItems { Name = a, Value = reader_note.GetInt32("note_no") });
-                    listBox.ContextMenuStrip = contextMenuStripListBox;
+                        Name = reader_note.GetString("note_name"),
+                        No = reader_note.GetInt32("note_no"),
+                        Is_favourite = reader_note.GetInt32("note_favourite")
+                    });
+                    contextMenuStripListBoxNote_move_notebook();
+                    contextMenuStripListBoxNote_add_label();
+                    listBox.ContextMenuStrip = contextMenuStripListBoxNote;
                     listBox.DisplayMember = "Name";
                     
                 }
@@ -326,8 +372,15 @@ namespace Gnote
             {
                 if (reader_note.HasRows)
                 {
-                    listBox.Items.Add(new ListBoxItems { Name = reader_note.GetString("note_name"), Value = reader_note.GetInt32("note_no") });
-                    listBox.ContextMenuStrip = contextMenuStripListBox;
+                    listBox.Items.Add(new ListBoxItems
+                    {
+                        Name = reader_note.GetString("note_name"),
+                        No = reader_note.GetInt32("note_no"),
+                        Is_favourite = reader_note.GetInt32("note_favourite")
+                    });
+                    contextMenuStripListBoxNote_move_notebook();
+                    contextMenuStripListBoxNote_add_label();
+                    listBox.ContextMenuStrip = contextMenuStripListBoxNote;
                     listBox.DisplayMember = "Name";
                 }
             }
@@ -342,7 +395,12 @@ namespace Gnote
             {
                 if (reader_note.HasRows)
                 {
-                    listBox.Items.Add(new ListBoxItems { Name = reader_note.GetString("note_name"), Value = reader_note.GetInt32("note_no") });
+                    listBox.Items.Add(new ListBoxItems
+                    {
+                        Name = reader_note.GetString("note_name"),
+                        No = reader_note.GetInt32("note_no"),
+                        Is_favourite = reader_note.GetInt32("note_favourite")
+                    });
                     listBox.ContextMenuStrip = contextMenuStripListBoxTrash; ;
                     listBox.DisplayMember = "Name";
                 }
@@ -358,8 +416,15 @@ namespace Gnote
             {
                 if (reader_note.HasRows)
                 {
-                    listBox.Items.Add(new ListBoxItems { Name = reader_note.GetString("note_name"), Value = reader_note.GetInt32("note_no") });
-                    listBox.ContextMenuStrip = contextMenuStripListBox;
+                    listBox.Items.Add(new ListBoxItems
+                    {
+                        Name = reader_note.GetString("note_name"),
+                        No = reader_note.GetInt32("note_no"),
+                        Is_favourite = reader_note.GetInt32("note_favourite")
+                    });
+                    contextMenuStripListBoxNote_move_notebook();
+                    contextMenuStripListBoxNote_add_label();
+                    listBox.ContextMenuStrip = contextMenuStripListBoxNote;
                     listBox.DisplayMember = "Name";
                 }
             }
@@ -371,6 +436,24 @@ namespace Gnote
             {
                 listBox.SelectedIndex = listBox.IndexFromPoint(e.Location);
 
+                ListBoxItems listboxitems = listBox.SelectedItem as ListBoxItems;
+                if (listboxitems != null)
+                {
+                    //修改收藏是否选中
+                    if (listboxitems.Is_favourite == 1)
+                    {
+                        收藏ToolStripMenuItem.Checked = true;
+                    }
+                    else
+                    {
+                        收藏ToolStripMenuItem.Checked = false;
+                    }
+                }
+                else
+                {
+                    
+                }
+
             }
             if (e.Button == MouseButtons.Left)
             {
@@ -379,15 +462,17 @@ namespace Gnote
                 listboxitems = this.listBox.SelectedItem as ListBoxItems;
                 if (listboxitems != null)
                 {
-                    MySqlDataReader reader_note_detail = new Note().ShowDetail(listboxitems.Value);
+                    MySqlDataReader reader_note_detail = new Note().ShowDetail(listboxitems.No);
                     while (reader_note_detail.Read())
                     {
                         if (reader_note_detail.HasRows)
                         {
+                            labelEditNoteNo.Text = reader_note_detail.GetInt32("note_no").ToString();
                             textBoxTitle.Text = reader_note_detail.GetString("note_name");
-                            textBoxEdit.Text = reader_note_detail.GetString("note_content");
+                            textBoxEdit.Text = reader_note_detail.GetString("note_text");
                         }
                     }
+                    reader_note_detail.Close();
                 }
 
             }
@@ -408,6 +493,17 @@ namespace Gnote
             NewNotebook NewNotebook = new NewNotebook();
             NewNotebook.Show();
             Load_treeview();
+        }
+        //保存
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            if (labelEditNoteNo.Text != "NULL")
+            {
+                
+                new Note().SaveNote(int.Parse(labelEditNoteNo.Text), textBoxTitle.Text, DateTime.Now, textBoxEdit.Text);
+                Load_note_list();
+                toolStripStatusLabelTip.Text = "保存成功";  
+            }
         }
         #endregion
 
@@ -430,24 +526,34 @@ namespace Gnote
         //保存
         private void 保存ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ListBoxItems listboxitems = listBox.SelectedItem as ListBoxItems;
-            if (listboxitems != null)
+
+            if (labelEditNoteNo.Text != "NULL")
             {
-                new Note().SaveNote(listboxitems.Value, textBoxTitle.Text, DateTime.Now, textBoxEdit.Text);
+                new Note().SaveNote(int.Parse(labelEditNoteNo.Text), textBoxTitle.Text, DateTime.Now, textBoxEdit.Text);
                 Load_note_list();
                 toolStripStatusLabelTip.Text = "保存成功";
             }
+            
         }
         ////////////////////////////////右击笔记///////////////////////////////////
         //删除笔记
         private void 删除ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             ListBoxItems listboxitems = listBox.SelectedItem as ListBoxItems;
-            new Note().deleteNote(listboxitems.Value);
+            new Note().deleteNote(listboxitems.No);
             Load_note_list();
             toolStripStatusLabelTip.Text = "删除成功";
         }
-
+        private void 收藏ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListBoxItems listboxitems = listBox.SelectedItem as ListBoxItems;
+            if(收藏ToolStripMenuItem.Checked == false)
+                new Note().favouriteNote(listboxitems.No);
+            else
+                new Note().unfavouriteNote(listboxitems.No);
+            Load_note_list();
+            toolStripStatusLabelTip.Text = "收藏成功";
+        }
 
         #endregion
 
@@ -477,7 +583,13 @@ namespace Gnote
 
 
 
-        public string a { get; set; }
+
+
+        
+
+        
+
+
     }
     #region treeview节点类
     public class TreeNodeTag
@@ -499,14 +611,20 @@ namespace Gnote
             get { return _name; }
             set { _name = value; }
         }
-        private int _value;  //可以存放其他属性（int型）
+        private int _no;  //可以存放其他属性（int型）
 
-        public int Value
+        public int No
         {
-            get { return _value; }
-            set { _value = value; }
+            get { return _no; }
+            set { _no = value; }
         }
+        private int _is_favourite;
 
+        public int Is_favourite
+        {
+            get { return _is_favourite; }
+            set { _is_favourite = value; }
+        }
     }
     #endregion
 }
