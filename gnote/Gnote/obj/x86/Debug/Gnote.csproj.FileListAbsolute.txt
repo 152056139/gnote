@@ -7,3 +7,7 @@ C:\Users\kai\Desktop\c#课程设计\gnote\Gnote\bin\Debug\Gnote.pdb
 C:\Users\kai\Desktop\c#课程设计\gnote\Gnote\obj\x86\Debug\Gnote.exe
 C:\Users\kai\Desktop\c#课程设计\gnote\Gnote\obj\x86\Debug\Gnote.pdb
 C:\Users\kai\Desktop\c#课程设计\gnote\Gnote\obj\x86\Debug\Gnote.csprojResolveAssemblyReference.cache
+\\VBOXSVR\gray\Desktop\C#作业\gnote\gnote\Gnote\obj\x86\Debug\Gnote.exe
+\\VBOXSVR\gray\Desktop\C#作业\gnote\gnote\Gnote\obj\x86\Debug\Gnote.pdb
+D:\Desktop\C#作业\gnote\gnote\Gnote\obj\x86\Debug\Gnote.exe
+D:\Desktop\C#作业\gnote\gnote\Gnote\obj\x86\Debug\Gnote.pdb

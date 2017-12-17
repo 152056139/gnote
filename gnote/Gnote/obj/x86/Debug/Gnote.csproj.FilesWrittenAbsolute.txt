@@ -1,0 +1,6 @@
+/home/gray/worker/C#作业/gnote/gnote/Gnote/obj/x86/Debug/.NETFramework,Version=v4.0,Profile=Client.AssemblyAttribute.cs
+/home/gray/worker/C#作业/gnote/gnote/Gnote/obj/x86/Debug/Gnote.Dialog.NewNotebook.resources
+/home/gray/worker/C#作业/gnote/gnote/Gnote/obj/x86/Debug/Gnote.Gnote.resources
+/home/gray/worker/C#作业/gnote/gnote/Gnote/obj/x86/Debug/Gnote.Properties.Resources.resources
+/home/gray/worker/C#作业/gnote/gnote/Gnote/obj/x86/Debug/Gnote.exe
+/home/gray/worker/C#作业/gnote/gnote/Gnote/obj/x86/Debug/Gnote.pdb
